@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from rest_framework import generics
+from rest_framework import generics, status
+from rest_framework.response import Response
 from .models import Item
 from .serializers import ItemSerializer
 from django.shortcuts import get_object_or_404
@@ -12,9 +13,72 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 # Create and List Items
-class ItemListCreateView(generics.ListCreateAPIView):
+# class ItemListCreateView(generics.ListCreateAPIView):
+#     queryset = Item.objects.all()
+#     serializer_class = ItemSerializer
+
+#     def create(self, request, *args, **kwargs):
+#         response = super().create(request, *args, **kwargs)
+#         return Response({
+#             'message': 'Item created successfully',
+#             'data': response.data
+#         }, status=status.HTTP_201_CREATED)
+
+class ItemListView(generics.ListAPIView):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
+
+    def list(self, request, *args, **kwargs):
+        response = super().list(request, *args, **kwargs)
+        return Response({
+            'message': 'Items retrieved successfully',
+            'data': response.data
+        }, status=status.HTTP_200_OK)
+
+# Create a new item
+class ItemCreateView(generics.CreateAPIView):
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
+
+    def create(self, request, *args, **kwargs):
+        response = super().create(request, *args, **kwargs)
+        return Response({
+            'message': 'Item created successfully',
+            'data': response.data
+        }, status=status.HTTP_201_CREATED)
+
+class GetUserView(generics.RetrieveAPIView):
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
+
+    def retrieve(self, request, *args, **kwargs):
+        response = super().retrieve(request, *args, **kwargs)
+        return Response({
+            'message': 'Item retrieved successfully',
+            'data': response.data
+        }, status=status.HTTP_200_OK)
+
+class UpdateUserView(generics.UpdateAPIView):
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
+
+    def update(self, request, *args, **kwargs):
+        response = super().update(request, *args, **kwargs)
+        return Response({
+            'message': 'Item updated successfully',
+            'data': response.data
+        }, status=status.HTTP_200_OK)
+
+class DeleteUserView(generics.DestroyAPIView):
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
+
+    def destroy(self, request, *args, **kwargs):
+        super().destroy(request, *args, **kwargs)
+        return Response({
+            'message': 'Item deleted successfully'
+        }, status=status.HTTP_204_NO_CONTENT)
+
 
 # Retrieve, Update, and Delete a Single Item
 class ItemRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):

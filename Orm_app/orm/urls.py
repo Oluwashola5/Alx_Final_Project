@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import ItemListCreateView, ItemRetrieveUpdateDestroyView
+from .views import CreateItemView, ItemRetrieveUpdateDestroyView
 from .views import CreateItemView, RetrieveItemView, UpdateItemView, DeleteItemView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework.authtoken import views
@@ -13,7 +13,7 @@ urlpatterns = [
 ]
 
 urlpatterns = [
-    path('items/', ItemListCreateView.as_view(), name='item-list-create'),
+    # path('items/', ItemListCreateView.as_view(), name='item-list-create'),
     path('items/<int:pk>/', ItemRetrieveUpdateDestroyView.as_view(), name='item-detail'),
 ]
 

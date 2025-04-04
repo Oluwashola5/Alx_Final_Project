@@ -23,7 +23,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('orm.urls')),
     path('', views.index, name='home'),
-    path('api/posts/', views.ItemListCreateView.as_view(), name='create-post'),
+    path('api/create/', views.ItemCreateView.as_view(), name='create-post'),
+    path('api/get-all-items/', views.ItemListView.as_view(), name='get-items'),
+    path('api/get-item/<int:pk>/', views.GetUserView.as_view(), name='get-user'),
+    path('api/update/<int:pk>/', views.UpdateUserView.as_view(), name='update-user'),
+    path('api/delete/<int:pk>/', views.DeleteUserView.as_view(), name='delete-user'),
     path('api/posts/<int:pk>/', views.ItemRetrieveUpdateDestroyView.as_view(), name='post-detail'),
-    path('api/token/', obtain_auth_token, name='api-token'),
+    path('api/login/', obtain_auth_token, name='custom-login'),
 ]
