@@ -1,7 +1,7 @@
 # Alx_Final_Project
 This is the final project for ALX Backend course
 
-##Steps Definition
+##  Steps Definition
 1. Create New project on Github "Alx_Final_Project"
 2. Pull empty repo on local
 3. Install DJango - Pip Install django
